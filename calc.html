@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head> <title> calculation</title>
+<script src="web3.min.js"></script></head>
+<body>
+   Enter a value:  <input type="text" id="id1" placeholder="A"/><br><br>
+   Enter b value:  <input type="text" id="id2" placeholder="B"/><br><br>
+  <input type="button" value="add" onclick="add()"/><br><br>
+
+<input type="button" value="sub" onclick="sub()"/><br><br>
+<input type="button" value="mul" onclick="mul()"/><br><br>
+<input type="button" value="div" onclick="div()"/><br><br>
+ </body>
+<script>
+
+web3.eth.defaultAccount=web3.eth.accounts[0];
+ var ss=web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "sub",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "mul",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "div",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "add",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+
+if(!web3.isConnected()) 
+{
+  
+        console.log("Ok");
+        
+      } else {
+        console.log("no");
+      }
+      web3.version.getNetwork((err, netId) => {
+            switch (netId) {
+              case "1":
+                console.log('This is mainnet')
+                break
+              case "2":
+                console.log('This is the deprecated Morden test network.')
+                break
+              case "3":
+                console.log('This is the ropsten test network.')
+                break
+              case "4":
+                console.log('This is the Rinkeby test network.')
+                break
+              case "42":
+                console.log('This is the Kovan test network.')
+                break
+              default:
+                console.log('This is an unknown network.')
+            }
+        })
+
+var s=ss.at('0x64811b3ebc458d21f10f9b03269963eda77aaeb9');
+function add()
+{
+var a=parseInt(document.getElementById('id1').value);
+var b=parseInt(document.getElementById('id2').value);
+  s.add(a,b,function(error,result)
+{
+if(!error)
+{
+alert(result);
+}
+else
+{
+alert("error");
+}
+}
+);
+}
+
+function sub()
+{
+var a=parseInt(document.getElementById('id1').value);
+var b=parseInt(document.getElementById('id2').value);
+  s.sub(a,b,function(error,result)
+{
+if(!error)
+{
+alert(result);
+}
+else
+{
+alert("error");
+}
+}
+);
+}
+
+function mul()
+{
+var a=parseInt(document.getElementById('id1').value);
+var b=parseInt(document.getElementById('id2').value);
+  s.mul(a,b,function(error,result)
+{
+if(!error)
+{
+alert(result);
+}
+else
+{
+alert("error");
+}
+}
+);
+}
+
+
+function div()
+{
+var a=parseInt(document.getElementById('id1').value);
+var b=parseInt(document.getElementById('id2').value);
+  s.div(a,b,function(error,result)
+{
+if(!error)
+{
+alert(result);
+}
+else
+{
+alert("error");
+}
+}
+);
+}
+</script>
+<html>
